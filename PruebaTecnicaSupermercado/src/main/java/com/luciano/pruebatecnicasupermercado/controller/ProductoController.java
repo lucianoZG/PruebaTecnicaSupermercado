@@ -31,7 +31,7 @@ public class ProductoController {
     @Operation(summary = "Obtener producto por ID", description = "Devuelve una producto cuyo ID indicado corresponda con el que tiene en la base de datos")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Producto encontrado"),
-            @ApiResponse(responseCode = "500", description = "Producto no encontrado")
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado")
     })
     @GetMapping("/{id}")
     public ResponseEntity<ProductoDTO> getProductoById(@PathVariable Long id) {
@@ -52,7 +52,7 @@ public class ProductoController {
     @Operation(summary = "Editar un producto", description = "Se ingresa el ID de un producto y se modifican los datos que el usuario ingrese, luego se devuelve el producto modificado")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Producto modificado"),
-            @ApiResponse(responseCode = "500", description = "Producto no encontrado")
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado")
     })
     @PutMapping("/{id}")
     public ResponseEntity<ProductoDTO> putProducto(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
@@ -62,7 +62,7 @@ public class ProductoController {
     @Operation(summary = "Eliminar un producto", description = "Se ingresa el ID de un producto y se lo elimina de la base de datos")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Producto eliminado"),
-            @ApiResponse(responseCode = "500", description = "Producto no encontrado")
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado")
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProducto(@PathVariable Long id) {
