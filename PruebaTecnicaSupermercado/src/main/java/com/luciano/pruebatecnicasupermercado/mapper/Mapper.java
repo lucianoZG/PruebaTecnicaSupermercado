@@ -1,13 +1,12 @@
 package com.luciano.pruebatecnicasupermercado.mapper;
 
-import com.luciano.pruebatecnicasupermercado.dto.ProductoDTO;
-import com.luciano.pruebatecnicasupermercado.dto.SucursalDTO;
-import com.luciano.pruebatecnicasupermercado.dto.VentaDTO;
-import com.luciano.pruebatecnicasupermercado.dto.VentaDetalleDTO;
+import com.luciano.pruebatecnicasupermercado.dto.*;
+import com.luciano.pruebatecnicasupermercado.model.Carrito;
 import com.luciano.pruebatecnicasupermercado.model.Producto;
 import com.luciano.pruebatecnicasupermercado.model.Sucursal;
 import com.luciano.pruebatecnicasupermercado.model.Venta;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 //Clase creada para mapear un tipo de dato a otro
@@ -67,6 +66,29 @@ public class Mapper {
                 .id(s.getId())
                 .nombre(s.getNombre())
                 .direccion(s.getDireccion())
+                .build();
+    }
+
+    //Carrito a CarritoDTO
+    public static CarritoDTO toDTO(Carrito c) {
+        if (c == null) return null;
+
+        List<ItemCarritoDTO> itemsDTO = c.getItems().stream()
+                .map(item -> ItemCarritoDTO.builder()
+                        .id(item.getId())
+                        .idProducto(item.getProducto().getId())
+                        .nombreProducto(item.getProducto().getNombre())
+                        .precioUnitActual(item.getProducto().getPrecioActual())
+                        .cantidad(item.getCantidad())
+                        .subTotal(item.getProducto().getPrecioActual() * item.getCantidad())
+                        .build())
+                .toList();
+
+        return CarritoDTO.builder()
+                .id(c.getId())
+                .idUsuario(c.getUsId())
+                .totalEstimado(c.getTotalEstimado())
+                .items(itemsDTO)
                 .build();
     }
 }
