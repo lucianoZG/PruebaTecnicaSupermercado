@@ -21,11 +21,11 @@ public class ItemCarrito {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carId")
-    @Column(name = "itemCarrito")
+    @ToString.Exclude // Evita bucles al imprimir logs
+    @EqualsAndHashCode.Exclude // Evita bucles al comparar objetos
     private Carrito carrito;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "proId")
-    @Column(name = "itemProducto")
     private Producto producto;
 }

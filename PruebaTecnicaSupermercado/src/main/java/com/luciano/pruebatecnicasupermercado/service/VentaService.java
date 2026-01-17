@@ -75,13 +75,8 @@ public class VentaService implements IVentaService{
                 .estado(ventaDTO.getEstado())
                 .sucursal(sucursal)
                 .build();
-//        Venta venta = new Venta();
-//        venta.setId(ventaDTO.getId());
-//        venta.setFecha(ventaDTO.getFecha());
-//        venta.setEstado(ventaDTO.getEstado());
-//        venta.setSucursal(sucursal);
 
-        // Mapear la lista de Detalles usando STREAM
+        // Mapear la lista de Detalles usando streams
         List<VentaDetalle> detalles = ventaDTO.getVentaDetalleDTOList().stream()
                 .map(detalleDTO -> {
                     // Buscar el producto (Base de datos)
@@ -113,7 +108,6 @@ public class VentaService implements IVentaService{
         venta.setPrecioTotal(totalVenta);
 
         // Guardar en cascada
-        // Al guardar 'venta', JPA guardará automáticamente los detalles si tienes CascadeType.ALL configurado
 //        Venta ventaGuardada = ventaRepository.save(venta);
 
         return Mapper.toDTO(ventaRepository.save(venta));

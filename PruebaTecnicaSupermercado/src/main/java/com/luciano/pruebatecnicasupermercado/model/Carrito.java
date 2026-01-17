@@ -17,10 +17,16 @@ public class Carrito {
     private Long id;
     @Column(name = "carUsId")
     private Long usId;
-    @Column(name = "carItems")
+    @OneToMany(orphanRemoval = true,
+            mappedBy = "carrito",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    @Builder.Default // Para que el Builder respete el "new ArrayList<>()"
     private List<ItemCarrito> items = new ArrayList<>();
 
     public Double getTotalEstimado () {
+        if (items == null) return 0.0;
+
         return items.stream()
                 .mapToDouble(item -> item.getCantidad() * item.getProducto().getPrecioActual())
                 .sum();

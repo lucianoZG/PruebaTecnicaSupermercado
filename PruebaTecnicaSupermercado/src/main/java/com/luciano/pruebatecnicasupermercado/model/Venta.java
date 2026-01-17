@@ -35,6 +35,9 @@ public class Venta {
 //    @JoinColumn(name = "sucId")
     private Sucursal sucursal;
 
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "venta",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
     private List<VentaDetalle> listaDetalles = new ArrayList<>();
 }
