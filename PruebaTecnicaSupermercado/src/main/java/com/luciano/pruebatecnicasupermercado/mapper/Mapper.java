@@ -86,7 +86,8 @@ public class Mapper {
 
         return CarritoDTO.builder()
                 .id(c.getId())
-                .idUsuario(c.getUsId())
+                .idUsuario(c.getUsuario() != null ? c.getUsuario().getId() : null)
+                .nombreUsuario(c.getUsuario() != null ? c.getUsuario().getNombre() : null)
                 .totalEstimado(c.getTotalEstimado())
                 .items(itemsDTO)
                 .build();

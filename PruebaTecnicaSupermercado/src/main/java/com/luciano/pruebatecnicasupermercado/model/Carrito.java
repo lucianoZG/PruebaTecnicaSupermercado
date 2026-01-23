@@ -15,8 +15,11 @@ public class Carrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "carId")
     private Long id;
-    @Column(name = "carUsId")
-    private Long usId;
+
+    @OneToOne
+    @JoinColumn(name = "carUsId", referencedColumnName = "usId")
+    private Usuario usuario;
+
     @OneToMany(orphanRemoval = true,
             mappedBy = "carrito",
             cascade = CascadeType.ALL,

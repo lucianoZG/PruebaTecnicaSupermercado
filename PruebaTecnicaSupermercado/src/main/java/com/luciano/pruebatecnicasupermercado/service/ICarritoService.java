@@ -2,6 +2,7 @@ package com.luciano.pruebatecnicasupermercado.service;
 
 import com.luciano.pruebatecnicasupermercado.dto.CarritoDTO;
 import com.luciano.pruebatecnicasupermercado.dto.VentaDTO;
+import com.luciano.pruebatecnicasupermercado.model.Usuario;
 
 public interface ICarritoService {
     CarritoDTO obtenerCarritoPorUsuario(Long usId);
@@ -10,5 +11,5 @@ public interface ICarritoService {
     CarritoDTO agregarProducto(Long carritoId, Long productoId, Integer cantidad);
     CarritoDTO quitarProducto(Long carritoId, Long productoId, Integer cantidad);
     CarritoDTO eliminarProducto(Long carritoId, Long productoId);
-    VentaDTO finalizarCompra(Long carritoId, Long sucursalId);
+    VentaDTO finalizarCompra(Long carritoId, Long sucursalId, Usuario usuario);
 }

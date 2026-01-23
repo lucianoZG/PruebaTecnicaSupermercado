@@ -7,12 +7,10 @@ import com.luciano.pruebatecnicasupermercado.exception.NotFoundException;
 import com.luciano.pruebatecnicasupermercado.exception.StockInsuficienteException;
 import com.luciano.pruebatecnicasupermercado.mapper.Mapper;
 import com.luciano.pruebatecnicasupermercado.model.*;
-import com.luciano.pruebatecnicasupermercado.repository.CarritoRepository;
-import com.luciano.pruebatecnicasupermercado.repository.ProductoRepository;
-import com.luciano.pruebatecnicasupermercado.repository.SucursalRepository;
-import com.luciano.pruebatecnicasupermercado.repository.VentaRepository;
+import com.luciano.pruebatecnicasupermercado.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,18 +27,34 @@ public class CarritoService implements ICarritoService{
     private final ProductoRepository productoRepository;
     private final VentaRepository ventaRepository;
     private final SucursalRepository sucursalRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     public CarritoDTO obtenerCarritoPorUsuario(Long usId) {
-        Carrito carrito;
+        Usuario usuario = usuarioRepository.findById(usId)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
 
-        if (carritoRepository.findByUsId(usId).isPresent()) {
-            carrito = carritoRepository.findByUsId(usId).get();
-        } else {
-            carrito = new Carrito();
-            carrito.setUsId(usId);
-            carritoRepository.save(carrito);
-        }
+//        Optional<Carrito> carritoOp = carritoRepository.findByUsuario(usuario);
+//
+//        Carrito carrito;
+//
+//        if (carritoOp.isPresent()) {
+//            carrito = carritoOp.get();
+//        } else {
+//            carrito = new Carrito();
+//            carrito.setUsuario(usuario);
+//            carritoRepository.save(carrito);
+//        }
+
+        // Busca el carrito, o si no existe, crea uno nuevo, lo guarda y lo devuelve.
+        Carrito carrito = carritoRepository.findByUsuario(usuario)
+                .orElseGet(() -> {
+                    Carrito nuevoCarrito = Carrito.builder()
+                            .usuario(usuario)
+                            .items(new ArrayList<>())
+                            .build();
+                    return carritoRepository.save(nuevoCarrito);
+                });
 
         return Mapper.toDTO(carrito);
     }
@@ -149,9 +163,13 @@ public class CarritoService implements ICarritoService{
 
     @Override
     @Transactional
-    public VentaDTO finalizarCompra(Long carritoId, Long sucursalId) {
+    public VentaDTO finalizarCompra(Long carritoId, Long sucursalId, Usuario usuario) {
         Carrito carrito = carritoRepository.findById(carritoId)
                 .orElseThrow(() -> new NotFoundException("Carrito no encontrado"));
+
+        if (!carrito.getUsuario().getId().equals(usuario.getId())) {
+            throw new AccessDeniedException("No tiene permiso para operar sobre este carrito");
+        }
 
         if (carrito.getItems().isEmpty()) {
             throw new IllegalStateException("El carrito está vacío, no se puede realizar la venta");
@@ -172,6 +190,7 @@ public class CarritoService implements ICarritoService{
 
                     if (producto.getCantidad() < item.getCantidad()) throw new StockInsuficienteException("Stock insuficiente de producto");
 
+                    //Descuento el stock del producto que se vendió
                     producto.setCantidad(producto.getCantidad() - item.getCantidad());
                     return VentaDetalle.builder()
                             .cantidadProd(item.getCantidad())

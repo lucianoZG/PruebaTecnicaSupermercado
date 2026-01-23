@@ -61,10 +61,10 @@ public class VentaService implements IVentaService{
     @Override
     public VentaDTO postVenta(VentaDTO ventaDTO) {
         //Primero nos fijamos si se indicó algún valor en todos los campos correspondientes.
-        if (ventaDTO == null) throw new RuntimeException("ventaDTO es null");
-        if (ventaDTO.getIdSucursal() == null) throw new RuntimeException("Se debe indicar la sucursal");
+        if (ventaDTO == null) throw new IllegalArgumentException("ventaDTO es null");
+        if (ventaDTO.getIdSucursal() == null) throw new IllegalArgumentException("Se debe indicar la sucursal");
         if (ventaDTO.getVentaDetalleDTOList() == null || ventaDTO.getVentaDetalleDTOList().isEmpty())
-            throw new RuntimeException("Se debe indicar el detalle");
+            throw new IllegalArgumentException("Se debe indicar el detalle");
 
         //Buscar sucursal
         Sucursal sucursal = sucursalRepository.findById(ventaDTO.getIdSucursal())

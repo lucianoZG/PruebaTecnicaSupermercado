@@ -10,6 +10,7 @@ import java.util.List;
 public class CarritoDTO {
     private Long id;
     private Long idUsuario;
+    private String nombreUsuario;
     private Double totalEstimado;
     private List<ItemCarritoDTO> items;
 }

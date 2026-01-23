@@ -32,8 +32,12 @@ public class Venta {
     private EstadoVenta estado;
 
     @ManyToOne
-//    @JoinColumn(name = "sucId")
+    @JoinColumn(name = "sucId")
     private Sucursal sucursal;
+
+    @ManyToOne
+    @JoinColumn(name = "venUsId")
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "venta",
             cascade = CascadeType.ALL,

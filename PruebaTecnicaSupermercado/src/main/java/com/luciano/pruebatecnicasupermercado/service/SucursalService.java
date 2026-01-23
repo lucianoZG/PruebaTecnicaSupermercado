@@ -34,7 +34,7 @@ public class SucursalService implements ISucursalService{
 
     @Override
     public SucursalDTO postSucursal(SucursalDTO sucursalDto) {
-        if (sucursalDto == null) throw new RuntimeException("SucursalDTO es null");
+        if (sucursalDto == null) throw new IllegalArgumentException("SucursalDTO es null");
 
         Sucursal sucursal = Sucursal.builder()
                 .direccion(sucursalDto.getDireccion())
