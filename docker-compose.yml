@@ -1,19 +1,17 @@
-version: '3'
-
 services:
-  pruebatecnicasupermercado: #nombre de la app establecido en application.properties
-    build: PruebaTecnicaSupermercado #nombre de la carpeta donde está el DockerFile
-    mem_limit: 512m
-    ports:
-      - "8080:8080"
-    environment:
-      DB_URL: jdbc:mysql://pruebatecsuper:3306/pruebatecsuper?createDatabseIfNotExist=true&serverTimezone=UTC
-      DB_USER_NAME: root
-      DB_PASSWORD: 123
-    restart: always
-    depends_on:
-      pruebatecsuper:
-          condition: service_healthy
+  #pruebatecnicasupermercado: #nombre de la app establecido en application.properties
+  #  build: PruebaTecnicaSupermercado #nombre de la carpeta donde está el DockerFile
+  #  mem_limit: 512m
+  #  ports:
+  #    - "8080:8080"
+  #  environment:
+  #    DB_URL: jdbc:mysql://pruebatecsuper:3306/pruebatecsuper?createDatabaseIfNotExist=true&serverTimezone=UTC
+  #    DB_USER_NAME: root
+  #    DB_PASSWORD: 123
+  #  restart: always
+  #  depends_on:
+  #    pruebatecsuper:
+  #        condition: service_healthy
   pruebatecsuper: #configuraciones de base de datos dockerizada
     image: mysql:8.0.33 #misma versión que esté en el pom
     ports:
