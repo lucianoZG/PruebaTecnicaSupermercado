@@ -6,6 +6,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +24,23 @@ public class ProductoController {
     @Autowired
     private IProductoService productoService;
 
-    @Operation(summary = "Obtener lista de todos los productos", description = "Devuelve una lista de todos los productos presentes en la base de datos")
+    @Operation(summary = "Listar productos paginados", description = "Devuelve una lista de productos presentes en la base de datos separados por páginas")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Productos encontrados")
     })
     @GetMapping
-    public ResponseEntity<List<ProductoDTO>> getProductos() {
-        return ResponseEntity.ok(productoService.getProductos());
+    public ResponseEntity<Page<ProductoDTO>> getProductos(@RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "10") int size,
+                                                          @RequestParam(defaultValue = "id") String sortField,
+                                                          @RequestParam(defaultValue = "asc") String sortDir) {
+
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return ResponseEntity.ok(productoService.getProductos(pageable));
     }
 
     @Operation(summary = "Obtener producto por ID", description = "Devuelve un producto cuyo ID indicado corresponda con el que tiene en la base de datos")

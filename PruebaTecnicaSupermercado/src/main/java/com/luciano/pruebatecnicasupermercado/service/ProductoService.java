@@ -7,6 +7,8 @@ import com.luciano.pruebatecnicasupermercado.model.Producto;
 import com.luciano.pruebatecnicasupermercado.repository.ProductoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +21,14 @@ public class ProductoService implements IProductoService{
     private final ProductoRepository repository;
 
     @Override
-    public List<ProductoDTO> getProductos() {
-        return repository.findAll().stream()
-                .map(Mapper::toDTO)
-                .toList();
+    public Page<ProductoDTO> getProductos(Pageable pageable) {
+//        return repository.findAll().stream()
+//                .map(Mapper::toDTO)
+//                .toList();
+
+        Page<Producto> paginaProductos = repository.findAll(pageable);
+
+        return paginaProductos.map(Mapper::toDTO);
     }
 
     @Override
