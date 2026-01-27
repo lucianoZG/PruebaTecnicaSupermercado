@@ -90,7 +90,7 @@ El proyecto cuenta con documentación interactiva generada automáticamente con 
 
 ## 🗄️ Modelo de Datos (DER)
 
-`![Diagrama Entidad Relación](./assets/diagrama-der.png)`
+./assets/diagrama-der.png`
 
 ## 👤 Autor
 
