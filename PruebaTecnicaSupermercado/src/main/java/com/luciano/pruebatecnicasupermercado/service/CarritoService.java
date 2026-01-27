@@ -29,22 +29,12 @@ public class CarritoService implements ICarritoService{
     private final SucursalRepository sucursalRepository;
     private final UsuarioRepository usuarioRepository;
 
+    private static final String CARRITO_NO_ENCONTRADO = "Carrito no encontrado";
+
     @Override
     public CarritoDTO obtenerCarritoPorUsuario(Long usId) {
         Usuario usuario = usuarioRepository.findById(usId)
                 .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
-
-//        Optional<Carrito> carritoOp = carritoRepository.findByUsuario(usuario);
-//
-//        Carrito carrito;
-//
-//        if (carritoOp.isPresent()) {
-//            carrito = carritoOp.get();
-//        } else {
-//            carrito = new Carrito();
-//            carrito.setUsuario(usuario);
-//            carritoRepository.save(carrito);
-//        }
 
         // Busca el carrito, o si no existe, crea uno nuevo, lo guarda y lo devuelve.
         Carrito carrito = carritoRepository.findByUsuario(usuario)
@@ -65,7 +55,7 @@ public class CarritoService implements ICarritoService{
         if (cantidad == null || cantidad <= 0) throw new IllegalArgumentException("Indique la cantidad");
 
         Carrito carrito = carritoRepository.findById(carritoId)
-                .orElseThrow(() -> new NotFoundException("Carrito no encontrado"));
+                .orElseThrow(() -> new NotFoundException(CARRITO_NO_ENCONTRADO));
 
         Producto producto = productoRepository.findById(productoId)
                 .orElseThrow(() -> new NotFoundException("Producto no encontrado"));
@@ -110,7 +100,7 @@ public class CarritoService implements ICarritoService{
     public CarritoDTO quitarProducto(Long carritoId, Long productoId, Integer cantidad) {
         if (cantidad == null || cantidad <= 0) throw new IllegalArgumentException("Indique una cantidad válida");
         Carrito carrito = carritoRepository.findById(carritoId)
-                .orElseThrow(() -> new NotFoundException("Carrito no encontrado"));
+                .orElseThrow(() -> new NotFoundException(CARRITO_NO_ENCONTRADO));
 
         //No hcae falta buscar el producto en si
         Optional<ItemCarrito> itemExistente = carrito.getItems().stream()
@@ -119,8 +109,6 @@ public class CarritoService implements ICarritoService{
 
         if (itemExistente.isPresent()) {
             ItemCarrito item = itemExistente.get();
-//            Producto productoEnCarrito = itemExistente.get().getProducto();
-//            Integer cantidadFinal = productoEnCarrito.getCantidad() - cantidad;
 
             int cantidadFinal = item.getCantidad() - cantidad;
 
@@ -142,7 +130,7 @@ public class CarritoService implements ICarritoService{
     @Override
     public CarritoDTO eliminarProducto(Long carritoId, Long productoId) {
         Carrito carrito = carritoRepository.findById(carritoId)
-                .orElseThrow(() -> new NotFoundException("Carrito no encontrado"));
+                .orElseThrow(() -> new NotFoundException(CARRITO_NO_ENCONTRADO));
 
         Optional<ItemCarrito> itemExistente = carrito.getItems().stream()
                 .filter(item -> item.getProducto().getId().equals(productoId))
@@ -165,7 +153,7 @@ public class CarritoService implements ICarritoService{
     @Transactional
     public VentaDTO finalizarCompra(Long carritoId, Long sucursalId, Usuario usuario) {
         Carrito carrito = carritoRepository.findById(carritoId)
-                .orElseThrow(() -> new NotFoundException("Carrito no encontrado"));
+                .orElseThrow(() -> new NotFoundException(CARRITO_NO_ENCONTRADO));
 
         if (!carrito.getUsuario().getId().equals(usuario.getId())) {
             throw new AccessDeniedException("No tiene permiso para operar sobre este carrito");

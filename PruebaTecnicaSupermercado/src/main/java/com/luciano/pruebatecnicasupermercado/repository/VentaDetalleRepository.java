@@ -1,6 +1,5 @@
 package com.luciano.pruebatecnicasupermercado.repository;
 
-import com.luciano.pruebatecnicasupermercado.model.Producto;
 import com.luciano.pruebatecnicasupermercado.model.VentaDetalle;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

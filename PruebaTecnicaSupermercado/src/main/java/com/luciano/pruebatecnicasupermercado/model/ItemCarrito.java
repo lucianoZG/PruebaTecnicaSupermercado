@@ -1,6 +1,5 @@
 package com.luciano.pruebatecnicasupermercado.model;
 
-import com.luciano.pruebatecnicasupermercado.dto.ProductoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

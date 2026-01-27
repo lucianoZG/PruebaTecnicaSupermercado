@@ -32,22 +32,10 @@ public class VentaService implements IVentaService{
 
     @Override
     public List<VentaDTO> getVentas() {
-        //Primera opción
         return ventaRepository.findAll()
                 .stream()
                 .map(Mapper::toDTO)
                 .toList();
-
-        //Segunda opción
-//        List<Venta> ventas = ventaRepository.findAll();
-//        List<VentaDTO> ventasDto = new ArrayList<>();
-//        VentaDTO dto;
-//        for (Venta v: ventas) {
-//            dto = Mapper.toDTO(v);
-//            ventasDto.add(dto);
-//        }
-//
-//        return ventasDto;
     }
 
     @Override
@@ -106,9 +94,6 @@ public class VentaService implements IVentaService{
                 .sum();
 
         venta.setPrecioTotal(totalVenta);
-
-        // Guardar en cascada
-//        Venta ventaGuardada = ventaRepository.save(venta);
 
         return Mapper.toDTO(ventaRepository.save(venta));
     }

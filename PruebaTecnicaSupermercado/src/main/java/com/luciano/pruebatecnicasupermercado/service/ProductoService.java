@@ -22,9 +22,6 @@ public class ProductoService implements IProductoService{
 
     @Override
     public Page<ProductoDTO> getProductos(Pageable pageable) {
-//        return repository.findAll().stream()
-//                .map(Mapper::toDTO)
-//                .toList();
 
         Page<Producto> paginaProductos = repository.findAll(pageable);
 
@@ -41,7 +38,7 @@ public class ProductoService implements IProductoService{
 
     @Override
     public ProductoDTO postProducto(ProductoDTO productoDto) {
-        if (productoDto == null) throw new RuntimeException("ProductoDTO es null");
+        if (productoDto == null) throw new IllegalArgumentException("ProductoDTO es null");
 
         var prod = Producto.builder()
                 .nombre(productoDto.getNombre())

@@ -5,6 +5,7 @@ import com.luciano.pruebatecnicasupermercado.service.IProductoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,15 +20,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/productos")
+@RequiredArgsConstructor
 public class ProductoController {
 
-    @Autowired
-    private IProductoService productoService;
+    private final IProductoService productoService;
 
     @Operation(summary = "Listar productos paginados", description = "Devuelve una lista de productos presentes en la base de datos separados por páginas")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Productos encontrados")
-    })
+    @ApiResponse(responseCode = "200", description = "Productos encontrados")
     @GetMapping
     public ResponseEntity<Page<ProductoDTO>> getProductos(@RequestParam(defaultValue = "0") int page,
                                                           @RequestParam(defaultValue = "10") int size,
@@ -44,19 +43,15 @@ public class ProductoController {
     }
 
     @Operation(summary = "Obtener producto por ID", description = "Devuelve un producto cuyo ID indicado corresponda con el que tiene en la base de datos")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Producto encontrado"),
-            @ApiResponse(responseCode = "404", description = "Producto no encontrado")
-    })
+    @ApiResponse(responseCode = "200", description = "Producto encontrado")
+    @ApiResponse(responseCode = "404", description = "Producto no encontrado")
     @GetMapping("/{id}")
     public ResponseEntity<ProductoDTO> getProductoById(@PathVariable Long id) {
         return ResponseEntity.ok(productoService.getProductoById(id));
     }
 
     @Operation(summary = "Dar de alta un producto", description = "Se ingresan los datos correspondientes a un producto y se lo da de alta en la base de datos, luego se devuelve el producto creado")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Producto creado")
-    })
+    @ApiResponse(responseCode = "201", description = "Producto creado")
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductoDTO> postProducto(@RequestBody ProductoDTO productoDTO) {
@@ -66,10 +61,8 @@ public class ProductoController {
     }
 
     @Operation(summary = "Editar un producto", description = "Se ingresa el ID de un producto y se modifican los datos que el usuario ingrese, luego se devuelve el producto modificado")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Producto modificado"),
-            @ApiResponse(responseCode = "404", description = "Producto no encontrado")
-    })
+    @ApiResponse(responseCode = "200", description = "Producto modificado")
+    @ApiResponse(responseCode = "404", description = "Producto no encontrado")
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductoDTO> putProducto(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
@@ -77,10 +70,8 @@ public class ProductoController {
     }
 
     @Operation(summary = "Eliminar un producto", description = "Se ingresa el ID de un producto y se lo elimina de la base de datos")
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Producto eliminado"),
-            @ApiResponse(responseCode = "404", description = "Producto no encontrado")
-    })
+    @ApiResponse(responseCode = "204", description = "Producto eliminado")
+    @ApiResponse(responseCode = "404", description = "Producto no encontrado")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteProducto(@PathVariable Long id) {

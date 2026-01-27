@@ -11,6 +11,11 @@ import java.util.stream.Collectors;
 
 //Clase creada para mapear un tipo de dato a otro
 public class Mapper {
+
+    private Mapper() {
+        throw new IllegalStateException("Clase de utilidad");
+    }
+
     //Producto a ProductoDTO
     public static ProductoDTO toDTO(Producto p) {
         if (p == null) return null;
@@ -35,18 +40,9 @@ public class Mapper {
                     .nombreProd(det.getProducto().getNombre())
                     .cantidadProd(det.getCantidadProd())
                     .precioUnitario(det.getPrecioUnitario())
-                    //Se calcula en el service
-//                    .subtotal(det.getPrecioUnitario() * det.getCantidadProd())
-//                            .multiply(Double.valueOf(det.getCantidadProd())))
                     .subtotal(det.getSubtotal())
                     .build()
         ).collect(Collectors.toList());
-
-        //Se calcula en el service
-//        var total = detallesLista.stream()
-//                .map(VentaDetalleDTO::getSubtotal)
-//                //Resumir los datos con reduce
-//                .reduce(0.0, Double::sum);
 
         return VentaDTO.builder()
                 .id(v.getId())

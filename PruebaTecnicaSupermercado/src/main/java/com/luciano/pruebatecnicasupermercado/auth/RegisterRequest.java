@@ -1,6 +1,5 @@
 package com.luciano.pruebatecnicasupermercado.auth;
 
-import com.luciano.pruebatecnicasupermercado.model.RolUsuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +12,4 @@ public class RegisterRequest {
     String nombre;
     String username;
     String password;
-//    RolUsuario rol;
 }
