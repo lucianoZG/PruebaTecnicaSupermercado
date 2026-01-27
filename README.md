@@ -90,8 +90,7 @@ El proyecto cuenta con documentación interactiva generada automáticamente con 
 
 ## 🗄️ Modelo de Datos (DER)
 
-*(Opcional: Si tienes una imagen del diagrama de tablas de MySQL Workbench, pégala aquí, queda muy profesional).*
-`![Diagrama Entidad Relación](./assets/der-diagram.png)`
+`![Diagrama Entidad Relación](./assets/diagrama-der.png)`
 
 ## 👤 Autor
 
