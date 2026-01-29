@@ -64,7 +64,7 @@ La API permite gestionar el flujo completo de compras: desde la administración 
     ```
     *Esto levantará MySQL en el puerto `3307` y la aplicación en el `8080`.*
 
-3.  **¡Listo!**
+3.  **Listo**
     La API estará disponible en: `http://localhost:8080`
 
 ## 📑 Documentación de la API
@@ -95,6 +95,5 @@ El proyecto cuenta con documentación interactiva generada automáticamente con 
 ## 👤 Autor
 
 **Luciano Zanni Giuliano**
-* **LinkedIn:** [Tu Perfil](https://linkedin.com/in/tu-perfil)
-* **Portfolio:** [Link a tu web si tienes]
+* **LinkedIn:** https://www.linkedin.com/in/luciano-zanni-giuliano-43bb28383/
 * **Email:** lucianozannig@gmail.com
