@@ -7,17 +7,84 @@
   },
   "item": [
     {
+      "name": "login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/auth/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "registroUsuario",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"John\",\r\n    \"username\": \"john123\",\r\n    \"password\": \"123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/auth/registro",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "registro"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "GET productos",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/productos",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/productos",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "productos"
@@ -29,11 +96,21 @@
     {
       "name": "POST producto",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "POST",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"nombre\": \"Uvas\",\r\n    \"precioActual\": 2500,\r\n    \"cantidad\": 30,\r\n    \"categoria\": \"Frutas y verduras\"\r\n}",
+          "raw": "{\r\n    \"nombre\": \"Fanta 2.5lts\",\r\n    \"precioActual\": 2600.75,\r\n    \"cantidad\": 60,\r\n    \"categoria\": \"BEBIDAS\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -41,12 +118,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/api/productos",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/productos",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "productos"
@@ -58,15 +133,23 @@
     {
       "name": "GET sucursales",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/sucursales",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/sucursales",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "sucursales"
@@ -78,6 +161,16 @@
     {
       "name": "POST sucursal",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "POST",
         "header": [],
         "body": {
@@ -90,12 +183,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/api/sucursales",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/sucursales",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "sucursales"
@@ -107,11 +198,21 @@
     {
       "name": "POST venta",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "POST",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"fecha\": \"2025-01-10\",\r\n    \"estado\": \"COMPLETADA\",\r\n    \"idSucursal\": 1,\r\n    \"ventaDetalleDTOList\": [\r\n        {\r\n            \"idProd\": 1,\r\n            \"precioUnitario\": 2500,\r\n            \"nombreProd\": \"Uvas\",\r\n            \"cantidadProd\": 2,\r\n            \"subtotal\": 5000\r\n        },\r\n        {\r\n            \"idProd\": 2,\r\n            \"precioUnitario\": 3500.5,\r\n            \"nombreProd\": \"Pringles\",\r\n            \"cantidadProd\": 3,\r\n            \"subtotal\": 10501.5\r\n        }\r\n    ],\r\n    \"precioTotal\": 15501.5\r\n}",
+          "raw": "{\r\n    \"fecha\": \"2025-01-10\",\r\n    \"estado\": \"COMPLETADA\",\r\n    \"idSucursal\": 1,\r\n    \"ventaDetalleDTOList\": [\r\n        {\r\n            \"idProd\": 1,\r\n            \"precioUnitario\": 2600.75,\r\n            \"nombreProd\": \"Fanta 2.5lts\",\r\n            \"cantidadProd\": 2,\r\n            \"subtotal\": 5201.5\r\n        }\r\n    ],\r\n    \"precioTotal\": 5201.5\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -119,12 +220,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/api/ventas",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/ventas",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "ventas"
@@ -139,6 +238,16 @@
         "disableBodyPruning": true
       },
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
         "header": [],
         "body": {
@@ -146,12 +255,10 @@
           "raw": "{\r\n    \"nombre\": \"Sucursal Zanjón\",\r\n    \"direccion\": \"Robles 188\"\r\n}"
         },
         "url": {
-          "raw": "http://localhost:8080/api/ventas",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/ventas",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "ventas"
@@ -163,19 +270,27 @@
     {
       "name": "GET producto By ID",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/productos/2",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/productos/1",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "productos",
-            "2"
+            "1"
           ]
         }
       },
@@ -184,15 +299,23 @@
     {
       "name": "GET sucursal by ID",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/sucursales/1",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/sucursales/1",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "sucursales",
@@ -205,15 +328,23 @@
     {
       "name": "GET producto mas vendido",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/ventas/producto_mas_vendido",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/ventas/producto_mas_vendido",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "ventas",
@@ -224,101 +355,32 @@
       "response": []
     },
     {
-      "name": "registroUsuario",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"nombre\": \"Luciano\",\r\n    \"username\": \"spanner\",\r\n    \"password\": \"123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/registro",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "registro"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "login",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTHVjaWFubyIsInN1YiI6InNwYW5uZXIiLCJpYXQiOjE3NjkxOTY5NTgsImV4cCI6MTc2OTI4MzM1OH0.i2eSPt6DzjEff__bH4dGaFED6LWZ0pgoJt3yJJEiJx0",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"username\": \"spanner\",\r\n    \"password\": \"123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "GET carrito",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
       "request": {
         "auth": {
           "type": "bearer",
           "bearer": [
             {
               "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTHVjaWFubyIsInN1YiI6InNwYW5uZXIiLCJpYXQiOjE3NjkxOTc5MjQsImV4cCI6MTc2OTI4NDMyNH0.PRAgMQ70CFxdt5I2wqD7fca6Cu5FXDIOkZeIfkki8bA",
+              "value": "",
               "type": "string"
             }
           ]
         },
-        "method": "POST",
+        "method": "GET",
         "header": [],
         "body": {
           "mode": "raw",
           "raw": ""
         },
         "url": {
-          "raw": "http://localhost:8080/api/carrito/mi-carrito",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/carrito/mi-carrito",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "carrito",
@@ -331,20 +393,12 @@
     {
       "name": "Agregar Producto",
       "request": {
-        "method": "POST",
-        "header": []
-      },
-      "response": []
-    },
-    {
-      "name": "Finalizar compra",
-      "request": {
         "auth": {
           "type": "bearer",
           "bearer": [
             {
               "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTHVjaWFubyIsInN1YiI6InNwYW5uZXIiLCJpYXQiOjE3NjkxOTc5MjQsImV4cCI6MTc2OTI4NDMyNH0.PRAgMQ70CFxdt5I2wqD7fca6Cu5FXDIOkZeIfkki8bA",
+              "value": "",
               "type": "string"
             }
           ]
@@ -356,18 +410,22 @@
           "raw": ""
         },
         "url": {
-          "raw": "http://localhost:8080/api/carrito/1/checkout/1",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/carrito/1/producto/1?cantidad=2",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "carrito",
             "1",
-            "checkout",
+            "producto",
             "1"
+          ],
+          "query": [
+            {
+              "key": "cantidad",
+              "value": "2"
+            }
           ]
         }
       },
@@ -381,7 +439,7 @@
           "bearer": [
             {
               "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTHVjaWFubyIsInN1YiI6InNwYW5uZXIiLCJpYXQiOjE3NjkxOTc5MjQsImV4cCI6MTc2OTI4NDMyNH0.PRAgMQ70CFxdt5I2wqD7fca6Cu5FXDIOkZeIfkki8bA",
+              "value": "",
               "type": "string"
             }
           ]
@@ -393,12 +451,10 @@
           "raw": ""
         },
         "url": {
-          "raw": "http://localhost:8080/api/carrito/1/producto/1?cantidad=1",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/carrito/1/producto/1?cantidad=1",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "8080",
           "path": [
             "api",
             "carrito",
@@ -415,6 +471,71 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Finalizar compra",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{base_url}}/api/carrito/1/checkout/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "carrito",
+            "1",
+            "checkout",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
     }
   ]
 }
