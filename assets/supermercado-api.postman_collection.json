@@ -1,0 +1,420 @@
+{
+  "info": {
+    "_postman_id": "5f98e1e8-3dca-4a67-bc73-d07a86b09a28",
+    "name": "Prueba técnica Supermercado",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "42583743"
+  },
+  "item": [
+    {
+      "name": "GET productos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/productos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "productos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST producto",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Uvas\",\r\n    \"precioActual\": 2500,\r\n    \"cantidad\": 30,\r\n    \"categoria\": \"Frutas y verduras\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/productos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "productos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET sucursales",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/sucursales",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "sucursales"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST sucursal",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Sucursal Zanjón\",\r\n    \"direccion\": \"Robles 188\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/sucursales",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "sucursales"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST venta",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fecha\": \"2025-01-10\",\r\n    \"estado\": \"COMPLETADA\",\r\n    \"idSucursal\": 1,\r\n    \"ventaDetalleDTOList\": [\r\n        {\r\n            \"idProd\": 1,\r\n            \"precioUnitario\": 2500,\r\n            \"nombreProd\": \"Uvas\",\r\n            \"cantidadProd\": 2,\r\n            \"subtotal\": 5000\r\n        },\r\n        {\r\n            \"idProd\": 2,\r\n            \"precioUnitario\": 3500.5,\r\n            \"nombreProd\": \"Pringles\",\r\n            \"cantidadProd\": 3,\r\n            \"subtotal\": 10501.5\r\n        }\r\n    ],\r\n    \"precioTotal\": 15501.5\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/ventas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "ventas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET ventas",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Sucursal Zanjón\",\r\n    \"direccion\": \"Robles 188\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/ventas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "ventas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET producto By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/productos/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "productos",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET sucursal by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/sucursales/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "sucursales",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET producto mas vendido",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ventas/producto_mas_vendido",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "ventas",
+            "producto_mas_vendido"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "registroUsuario",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Luciano\",\r\n    \"username\": \"spanner\",\r\n    \"password\": \"123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/registro",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "registro"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTHVjaWFubyIsInN1YiI6InNwYW5uZXIiLCJpYXQiOjE3NjkxOTY5NTgsImV4cCI6MTc2OTI4MzM1OH0.i2eSPt6DzjEff__bH4dGaFED6LWZ0pgoJt3yJJEiJx0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"spanner\",\r\n    \"password\": \"123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET carrito",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTHVjaWFubyIsInN1YiI6InNwYW5uZXIiLCJpYXQiOjE3NjkxOTc5MjQsImV4cCI6MTc2OTI4NDMyNH0.PRAgMQ70CFxdt5I2wqD7fca6Cu5FXDIOkZeIfkki8bA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/carrito/mi-carrito",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "carrito",
+            "mi-carrito"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Agregar Producto",
+      "request": {
+        "method": "POST",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Finalizar compra",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTHVjaWFubyIsInN1YiI6InNwYW5uZXIiLCJpYXQiOjE3NjkxOTc5MjQsImV4cCI6MTc2OTI4NDMyNH0.PRAgMQ70CFxdt5I2wqD7fca6Cu5FXDIOkZeIfkki8bA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/carrito/1/checkout/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "carrito",
+            "1",
+            "checkout",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Quitar producto",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTHVjaWFubyIsInN1YiI6InNwYW5uZXIiLCJpYXQiOjE3NjkxOTc5MjQsImV4cCI6MTc2OTI4NDMyNH0.PRAgMQ70CFxdt5I2wqD7fca6Cu5FXDIOkZeIfkki8bA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/carrito/1/producto/1?cantidad=1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "carrito",
+            "1",
+            "producto",
+            "1"
+          ],
+          "query": [
+            {
+              "key": "cantidad",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
