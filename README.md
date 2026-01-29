@@ -69,9 +69,26 @@ La API permite gestionar el flujo completo de compras: desde la administración 
 
 ## 📑 Documentación de la API
 
-El proyecto cuenta con documentación interactiva generada automáticamente con Swagger.
+El proyecto cuenta con documentación interactiva generada automáticamente con Swagger y una colección de pruebas lista para importar.
+
+### 1. Swagger UI
 
 👉 **Ver Documentación Swagger:** http://localhost:8080/swagger-ui/index.html
+
+![Vista General de la API](./assets/swagger-overview.png)
+
+*Ejemplo de respuesta de Login con Token JWT:*
+![Login JWT](./assets/swagger-login-token.png)
+
+### 2. Postman Collection 🚀
+Para probar la API rápidamente, he incluido una colección completa con los flujos de:
+* Registro y Login (Auth).
+* Gestión de Productos y Sucursales (Admin).
+* Ciclo de compra completo (Carrito -> Checkout).
+
+📥 **[Descargar Colección de Postman](./assets/supermercado-api.postman_collection.json)**
+
+> **Instrucciones:** Descarga el archivo, abre Postman, haz clic en el botón **"Import"** (arriba a la izquierda) y arrastra el archivo JSON.
 
 ### Endpoints de Ejemplo
 
