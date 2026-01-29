@@ -75,7 +75,8 @@ El proyecto cuenta con documentación interactiva generada automáticamente con 
 
 👉 **Ver Documentación Swagger:** http://localhost:8080/swagger-ui/index.html
 
-![Vista General de la API](./assets/swagger-overview.png)
+![Vista General de la API](./assets/swagger-overview1.png)
+![Vista General de la API](./assets/swagger-overview2.png)
 
 *Ejemplo de respuesta de Login con Token JWT:*
 ![Login JWT](./assets/swagger-login-token.png)
