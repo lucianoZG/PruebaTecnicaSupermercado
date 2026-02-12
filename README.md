@@ -1,4 +1,4 @@
-# 🛒 Supermercado API REST
+# 🛒 Supermarket REST API
 
 ![Java](https://img.shields.io/badge/Java-17-orange?style=flat-square)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.0-green?style=flat-square)
@@ -6,112 +6,114 @@
 ![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=flat-square)
 ![JWT](https://img.shields.io/badge/Security-JWT-red?style=flat-square)
 
-## 📖 Descripción
+## 📖 Overview
 
-Este proyecto es el Backend de una aplicación de **E-commerce para un Supermercado**, desarrollado como parte de un desafío técnico / proyecto personal. 
+This project is a robust **Backend API** designed to simulate a high-traffic **Supermarket E-commerce platform**. It allows for complete management of the purchasing lifecycle: from product and branch administration to a smart shopping cart system and sales order generation.
 
-La API permite gestionar el flujo completo de compras: desde la administración de productos y sucursales, hasta la gestión del carrito de compras del usuario y la generación de órdenes de venta. Cuenta con un sistema de seguridad robusto basado en **Roles (Admin/User)** y autenticación vía **Tokens JWT**.
+The architecture focuses on scalability and security, implementing a **Role-Based Access Control (RBAC)** system with **JWT (JSON Web Token)** authentication and a fully containerized environment using Docker.
 
-## 🚀 Tecnologías Utilizadas
+## 🚀 Tech Stack
 
-* **Lenguaje:** Java 17
-* **Framework Principal:** Spring Boot 3
-* **Base de Datos:** MySQL (Ejecutada en contenedor Docker)
-* **Seguridad:** Spring Security 6 + JWT (Json Web Token)
+* **Language:** Java 17
+* **Framework:** Spring Boot 3
+* **Database:** MySQL (Dockerized)
+* **Security:** Spring Security 6 + JWT
 * **ORM:** Hibernate / JPA
-* **Documentación:** OpenAPI (Swagger UI)
-* **Herramientas:** Docker Compose, Maven, Lombok, ModelMapper.
+* **Documentation:** OpenAPI (Swagger UI)
+* **DevOps:** Docker & Docker Compose
+* **Utilities:** Maven, Lombok, ModelMapper
 
-## ✨ Funcionalidades Principales
+## ✨ Key Features
 
-### 🔐 Seguridad y Autenticación
-* Registro e Inicio de Sesión (Devuelve Token JWT).
-* Manejo de Roles (**ADMIN** y **USUARIO**).
-* Protección de rutas mediante `Authorization: Bearer Token`.
+### 🔐 Security & Authentication
+* **JWT Implementation:** Secure Stateless Authentication.
+* **RBAC:** Distinct roles for **ADMIN** and **USER**.
+* **Route Protection:** Endpoints secured via `Authorization: Bearer Token`.
 
-### 📦 Gestión de Catálogo (Rol ADMIN)
-* CRUD de **Sucursales**.
-* CRUD de **Productos** (con control de Stock y Precios).
-* Paginación y ordenamiento de listados para optimizar el rendimiento.
+### 📦 Catalog Management (Admin Role)
+* **Branch Management:** CRUD operations for physical store locations.
+* **Product Inventory:** Complete management of stock levels and pricing.
+* **Performance:** Pagination and sorting implemented for large datasets.
 
-### 🛒 Experiencia de Compra (Rol USUARIO)
-* **Carrito de Compras Inteligente:** Persistente en base de datos.
-* Agregar/Quitar productos y cálculo automático de totales.
-* **Checkout:** Generación de la orden de venta y vaciado automático del carrito.
-* Historial de compras personal.
+### 🛒 Shopping Experience (User Role)
+* **Persistent Smart Cart:** The cart state is saved in the database, not just in the session.
+* **Dynamic Calculations:** Automatic computation of totals based on unit/weight.
+* **Checkout Process:** Atomic transaction that generates a Sales Order and clears the cart.
+* **Purchase History:** Users can view their past orders.
 
-### 📊 Ventas (Rol ADMIN)
-* Visualización de todas las ventas realizadas.
-* Filtros y detalles de facturación.
+### 📊 Sales Monitoring (Admin Role)
+* **Sales Dashboard:** View all transactions with detailed breakdown.
+* **Filtering:** Filter sales by date, user, or branch.
 
-## 🛠️ Instalación y Ejecución
+## 🛠️ Installation & Setup
 
-### Prerrequisitos
-* Tener instalado [Docker Desktop](https://www.docker.com/products/docker-desktop/).
-* (Opcional) Java 17 y Maven si quieres correrlo sin Docker.
+### Prerequisites
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
+* (Optional) Java 17 and Maven (only if running without Docker).
 
-### Pasos
-1.  **Clonar el repositorio:**
+### Steps to Run
+1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/lucianoZG/PruebaTecnicaSupermercado
+    git clone [https://github.com/lucianoZG/PruebaTecnicaSupermercado](https://github.com/lucianoZG/PruebaTecnicaSupermercado)
     cd PruebaTecnicaSupermercado
     ```
 
-2.  **Levantar la Base de Datos (y la App):**
-    Asegúrate de que Docker Desktop esté corriendo y ejecuta:
+2.  **Spin up the Infrastructure:**
+    Ensure Docker Desktop is running, then execute:
     ```bash
     docker-compose up -d
     ```
-    *Esto levantará MySQL en el puerto `3307` y la aplicación en el `8080`.*
+    *This will start the MySQL container on port `3307` and the Application on port `8080`.*
 
-3.  **Listo**
-    La API estará disponible en: `http://localhost:8080`
+3.  **Access the API:**
+    The server will be live at: `http://localhost:8080`
 
-## 📑 Documentación de la API
+## 📑 API Documentation
 
-El proyecto cuenta con documentación interactiva generada automáticamente con Swagger y una colección de pruebas lista para importar.
+The project includes interactive documentation generated automatically via Swagger and a ready-to-use Postman Collection.
 
 ### 1. Swagger UI
 
-👉 **Ver Documentación Swagger:** http://localhost:8080/swagger-ui/index.html
+👉 **View Interactive Docs:** http://localhost:8080/swagger-ui/index.html
 
-![Vista General de la API](./assets/swagger-overview1.png)
-![Vista General de la API](./assets/swagger-overview2.png)
+![Swagger Overview](./assets/swagger-overview1.png)
+![Swagger Overview](./assets/swagger-overview2.png)
 
-*Ejemplo de respuesta de Login con Token JWT:*
+*Example: JWT Login Response*
 ![Login JWT](./assets/swagger-login-token.png)
 
 ### 2. Postman Collection 🚀
-Para probar la API rápidamente, he incluido una colección completa con los flujos de:
-* Registro y Login (Auth).
-* Gestión de Productos y Sucursales (Admin).
-* Ciclo de compra completo (Carrito -> Checkout).
+To test the API flows immediately, I have included a full collection covering:
+* Auth (Register/Login).
+* Admin Management (Products/Branches).
+* User Purchase Flow (Cart -> Checkout).
 
-📥 **[Descargar Colección de Postman](./assets/supermercado-api.postman_collection.json)**
+📥 **[Download Postman Collection](./assets/supermercado-api.postman_collection.json)**
 
-> **Instrucciones:** Descarga el archivo, abre Postman, haz clic en el botón **"Import"** (arriba a la izquierda) y arrastra el archivo JSON.
+> **Instructions:** Download the JSON file, open Postman, click **"Import"** (top left), and drag & drop the file.
 
-### Endpoints de Ejemplo
+### Endpoint Examples
 
-| Método | Endpoint | Descripción | Rol Requerido |
+| Method | Endpoint | Description | Required Role |
 | :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/login` | Obtener Token JWT | Público |
-| `GET` | `/api/productos` | Listar catálogo (Paginado) | Público |
-| `POST` | `/api/productos` | Crear nuevo producto | **ADMIN** |
-| `GET` | `/api/carrito/mi-carrito` | Ver mi carrito actual | **USUARIO** |
-| `POST` | `/api/carrito/{id}/checkout/{sucursal}` | Finalizar compra | **USUARIO** |
+| `POST` | `/api/auth/login` | Get JWT Token | Public |
+| `GET` | `/api/productos` | List Catalog (Paginated) | Public |
+| `POST` | `/api/productos` | Create New Product | **ADMIN** |
+| `GET` | `/api/carrito/mi-carrito` | View My Current Cart | **USER** |
+| `POST` | `/api/carrito/{id}/checkout/{branch}` | Finalize Purchase | **USER** |
 
-## 🧪 Testing (Próximamente)
+## 🧪 Roadmap & Quality
 
-* [ ] Tests Unitarios con JUnit 5 y Mockito.
-* [ ] Tests de Integración.
+* [ ] **Unit Testing:** Implementation of JUnit 5 and Mockito coverage.
+* [ ] **Integration Testing:** End-to-end flow validation.
+* [ ] **Code Quality:** Integration with SonarQube for static analysis.
 
-## 🗄️ Modelo de Datos (DER)
+## 🗄️ Database Schema (ER Diagram)
 
-![Diagrama DER](./assets/diagrama-der.png)
+![ER Diagram](./assets/diagrama-der.png)
 
-## 👤 Autor
+## 👤 Author
 
 **Luciano Zanni Giuliano**
-* **LinkedIn:** https://www.linkedin.com/in/luciano-zanni-giuliano-43bb28383/
+* **LinkedIn:** [linkedin.com/in/lucianozannig](https://www.linkedin.com/in/lucianozannig)
 * **Email:** lucianozannig@gmail.com
