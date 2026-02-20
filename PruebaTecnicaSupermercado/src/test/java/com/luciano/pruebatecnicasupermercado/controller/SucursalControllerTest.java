@@ -15,15 +15,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
-
-
 import java.util.List;
-
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(SucursalController.class)
-// IMPORTANTE: Esto desactiva la seguridad (403 Forbidden) para que la petición pase directo
+// Esto desactiva la seguridad (403 Forbidden) para que la petición pase directo
 @AutoConfigureMockMvc(addFilters = false)
 public class SucursalControllerTest {
 

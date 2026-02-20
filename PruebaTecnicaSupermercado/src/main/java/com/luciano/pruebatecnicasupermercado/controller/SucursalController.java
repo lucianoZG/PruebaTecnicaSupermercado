@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class SucursalController {
     @ApiResponse(responseCode = "403", description = "Acceso denegado: Requiere rol de Administrador", content = @Content)
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<SucursalDTO> postSucursal(@RequestBody SucursalDTO sucursalDTO) {
+    public ResponseEntity<SucursalDTO> postSucursal(@Valid @RequestBody SucursalDTO sucursalDTO) {
         SucursalDTO sucursalCreada = sucursalService.postSucursal(sucursalDTO);
         return ResponseEntity.created(URI.create("/api/sucursales/" + sucursalCreada.getId()))
                 .body(sucursalCreada);
@@ -55,7 +56,7 @@ public class SucursalController {
     @ApiResponse(responseCode = "404", description = "Entidad no encontrada: El ID de Sucursal no existe", content = @Content)
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<SucursalDTO> putSucursal(@PathVariable Long id, @RequestBody SucursalDTO sucursalDTO) {
+    public ResponseEntity<SucursalDTO> putSucursal(@PathVariable Long id, @Valid @RequestBody SucursalDTO sucursalDTO) {
         return ResponseEntity.ok(sucursalService.updateSucursal(id, sucursalDTO));
     }
 
